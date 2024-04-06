@@ -11,7 +11,6 @@ const App = () => {
 
   function addToCart(guitar){
     const itemExist = cart.findIndex(item => item.id == guitar.id);
-
     if (itemExist == -1){
       setCart([...cart, {...guitar, quantity: 1}])
     }else{
@@ -19,13 +18,25 @@ const App = () => {
       updateCart[itemExist].quantity++;
       setCart(updateCart);
     }
+  }
 
-    console.log(cart)
+  function removeToCart(guitar){
+    const itemExist = cart.findIndex(item => item.id == guitar.id);
+    const updateCart = [...cart];
+    if(updateCart[itemExist].quantity > 0)
+    {
+      updateCart[itemExist].quantity--;
+      setCart(updateCart);
+    }
   }
 
   return (
     <>
-    <Header />  
+    <Header
+     cart={cart}
+     addToCart={addToCart}
+     removeToCart={removeToCart}
+    />  
     <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 

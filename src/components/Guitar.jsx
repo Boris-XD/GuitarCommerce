@@ -1,4 +1,4 @@
-const Guitar = ({ guitar, addToCart }) => {
+const Guitar = ({ guitar, addToCart}) => {
 
   const { id, name, description, image, price } = guitar;
 

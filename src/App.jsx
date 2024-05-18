@@ -22,12 +22,25 @@ const App = () => {
 
   function removeToCart(guitar){
     const itemExist = cart.findIndex(item => item.id == guitar.id);
-    const updateCart = [...cart];
-    if(updateCart[itemExist].quantity > 0)
-    {
+    let updateCart = [...cart];
+    if(updateCart[itemExist].quantity > 0){
       updateCart[itemExist].quantity--;
+      if (updateCart[itemExist].quantity == 0){
+        updateCart = updateCart.filter((item, index) => index !== itemExist);  
+      }
       setCart(updateCart);
     }
+  }
+
+  function deleteToCart(guitar){
+    const itemExist = cart.findIndex(item => item.id == guitar.id);
+    const updateCart = cart.filter((item, index) => index !== itemExist);
+    setCart(updateCart);
+  }
+
+  function cleanCart()
+  {
+    setCart([]);
   }
 
   return (
@@ -36,6 +49,8 @@ const App = () => {
      cart={cart}
      addToCart={addToCart}
      removeToCart={removeToCart}
+     deleteToCart={deleteToCart}
+     cleanCart={cleanCart}
     />  
     <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
